@@ -1,0 +1,4 @@
+repository "Bizara Life Skill 2026-05-26_10-42-13/Bizara Life Skill@18966606376992@cloud"
+  path "/"
+    br "/main"
+    co "/main"
