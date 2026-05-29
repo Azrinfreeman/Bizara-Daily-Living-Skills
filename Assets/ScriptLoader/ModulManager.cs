@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement; // --- KOD BAHARU: Wajib ada untuk tukar Scene ---
 
 public class ModulManager : MonoBehaviour
@@ -8,15 +8,15 @@ public class ModulManager : MonoBehaviour
     public GameObject panelGameTap;
     public GameObject panelGameDrag;
     public GameObject panelGameSequence;
-    public GameObject panelReward; 
+    public GameObject panelReward;
 
     [Header("Kad Sequence")]
     [Header("Sistem Urutan Kad")]
     public KadSusun[] senaraiKadModul; // Boleh letak 3, 4, atau lebih kad di Inspector
 
     [Header("Tetapan Masa Delay (Saat)")]
-    public float masaDelayTap = 1.0f; 
-    public float masaDelaySequence = 2.0f; 
+    public float masaDelayTap = 1.0f;
+    public float masaDelaySequence = 2.0f;
 
     public void SelesaiGameTap()
     {
@@ -45,11 +45,12 @@ public class ModulManager : MonoBehaviour
 
     private void RawakkanKad()
     {
-        if (senaraiKadModul == null || senaraiKadModul.Length == 0) return;
+        if (senaraiKadModul == null || senaraiKadModul.Length == 0)
+            return;
 
         int jumlahKad = senaraiKadModul.Length;
         Vector3[] senaraiPosisi = new Vector3[jumlahKad];
-        
+
         // 1. Ambil semua posisi asal kad semasa di skrin
         for (int i = 0; i < jumlahKad; i++)
         {
@@ -77,7 +78,7 @@ public class ModulManager : MonoBehaviour
                 // Jika kedudukan X kad sebelumnya lebih besar dari kad selepasnya, bermakna ia sudah berselerak
                 if (senaraiPosisi[i].x > senaraiPosisi[i + 1].x)
                 {
-                    adaYangSalah = true; 
+                    adaYangSalah = true;
                     break;
                 }
             }
@@ -100,14 +101,18 @@ public class ModulManager : MonoBehaviour
     // Tambahkan fungsi ini di bahagian bawah skrip ModulManager.cs
     public void SemakSusunanKad()
     {
-        if (senaraiKadModul == null || senaraiKadModul.Length == 0) return;
+        if (senaraiKadModul == null || senaraiKadModul.Length == 0)
+            return;
 
         bool semuaBetul = true;
 
         // 1. Menyemak adakah setiap kad berada dalam kedudukan X dari kiri ke kanan
         for (int i = 0; i < senaraiKadModul.Length - 1; i++)
         {
-            if (senaraiKadModul[i].transform.position.x > senaraiKadModul[i + 1].transform.position.x)
+            if (
+                senaraiKadModul[i].transform.position.x
+                > senaraiKadModul[i + 1].transform.position.x
+            )
             {
                 semuaBetul = false; // Ada kad yang salah susunan
                 break;
@@ -162,6 +167,6 @@ public class ModulManager : MonoBehaviour
     {
         Debug.Log("Kembali ke Modul Utama...");
         // NOTA PENTING: Tukar "ModulUtama" di bawah ini mengikut nama fail Scene menu utama anda!
-        SceneManager.LoadScene("ModulUtama"); 
+        SceneManager.LoadScene("ModulUtama");
     }
 }
