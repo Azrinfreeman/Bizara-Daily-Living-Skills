@@ -1,0 +1,65 @@
+Text (TMP) | Upload
+Text | Upload Image
+Text (TMP) | 3
+H_Status | Status
+Text (TMP) | MODUL UTAMA
+Text | ​
+Text | Upload MP4
+StatusText | Default instruction video active.
+Text (TMP) | Upload
+Text | Child Profile
+Text (TMP) | Upload
+H_Jumlah Siap | Jumlah Siap
+StarsText | ⭐⭐⭐ (9/9)
+Text | Repeated
+TitleText | I Am Clean
+Cell_4 | Data
+StarsText | ⭐⭐⭐ (9/9)
+Text (TMP) | Button
+Text | I Am Organized
+Label_Avatar | Select Avatar
+Text | Upload MP4
+Text | System Settings
+Text | Close
+H_Module | Module
+H_Date & Time | Date & Time
+SayaBolehText | Saya Boleh!
+Text | Manage Images & Video
+Cell_2 | Data
+Text (TMP) | 1
+Text | Download CSV Report
+Text (TMP) | Upload
+subTitle | I Can Go To The Toilet
+TitleText | I Am Organized
+subTitle | I Can Keep Myself Clean
+subTitle | I Can Prepare Myself
+TitleText | Toilet Time
+BizaraText | BIZARA
+Text (TMP) | 4
+Text | Parent Mode
+subTitle | I Can Eat Independently
+H_Name | Name
+Cell_3 | Data
+TitleText | Eating & Drinking
+Text | Reset All
+Text (TMP) | Button
+Text | Home
+Text | Parent & Teacher Dashboard
+Text | I Am Clean
+H_Activity | Activity
+Text (TMP) | Mod Cikgu / Ibubapa
+Text | Toilet Time
+Label_Age (Years) | Age (Years)
+Text | English / Melayu
+Cell_0 | Data
+Icon | ≡
+Text (TMP) | 2
+Cell_1 | Data
+NameText | Player Name
+Text | 💾 Save Profile
+Text (TMP) | Button
+Text | Eating & Drinking
+Text | Progress & CSV
+Teks_SoalanMatematik | New Text
+Label_Child Name | Child Name
+Text | ​

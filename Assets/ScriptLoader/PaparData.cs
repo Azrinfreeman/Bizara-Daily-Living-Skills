@@ -1,129 +1,240 @@
 using UnityEngine;
 using TMPro; 
 using UnityEngine.UI; 
-using System.IO; // WAJIB ADA untuk fungsi menulis fail ke dalam storan peranti
+using System.IO; 
+using System.Collections.Generic;
 
 public class PaparData : MonoBehaviour
 {
     [Header("Paparan UI")]
-    public TextMeshProUGUI teksPapanPemuka; // Komponen teks utama untuk paparan profil & rekod
+    public TextMeshProUGUI teksPapanPemuka; // Legacy
 
-    [Header("Komponen Input Nama")]
+    [Header("Komponen Input Profil")]
     public TMP_InputField inputNamaPelajar;
-    public Button butangSimpanNama;
+    public TMP_InputField inputUmurPelajar;
+    public Button butangSimpan;
+    public Image[] avatarImages;
+    public Outline[] avatarOutlines; 
 
-    // Pemboleh ubah dalaman untuk menyimpan data sementara sebelum dieksport
+    [Header("Komponen Progress & CSV")]
+    public Transform tableContentContainer;
+    public GameObject rowPrefab;
+    public Button butangReset;
+    public Button butangDownload;
+    public Sprite starSprite;
+
     private string namaPelajarSemasa = "";
-    private int siapMakan, siapToilet, siapModul3, siapModul4;
-    private string tarikhMakan, tarikhToilet, tarikhModul3, tarikhModul4;
+    private string umurPelajarSemasa = "";
+    private int avatarSemasa = 0;
+    private int avatarDipilihSementara = 0;
 
     void Awake()
     {
-        if (butangSimpanNama != null)
+        if (butangSimpan != null)
         {
-            butangSimpanNama.onClick.AddListener(SimpanNamaPelajar);
+            butangSimpan.onClick.AddListener(SimpanDataProfil);
+        }
+        if (butangDownload != null)
+        {
+            butangDownload.onClick.AddListener(EksportKeExcel);
+        }
+        if (butangReset != null)
+        {
+            butangReset.onClick.AddListener(ResetSemuaRekod);
         }
     }
 
     void OnEnable()
     {
         KemaskanPaparan();
+        BinaJadualRekod();
+    }
+
+    public void PilihAvatar(int index)
+    {
+        avatarDipilihSementara = index;
+        KemaskiniVisualAvatar(avatarDipilihSementara);
+    }
+
+    private void KemaskiniVisualAvatar(int selectedIndex)
+    {
+        if (avatarOutlines != null && avatarOutlines.Length > 0)
+        {
+            for (int i = 0; i < avatarOutlines.Length; i++)
+            {
+                if (avatarOutlines[i] != null)
+                {
+                    avatarOutlines[i].enabled = (i == selectedIndex);
+                }
+            }
+        }
     }
 
     public void KemaskanPaparan()
     {
-        // 1. Ambil data profil nama pelajar (Disimpan ke pemboleh ubah kelas)
         namaPelajarSemasa = PlayerPrefs.GetString("NamaPelajar", "Belum Tetap");
+        umurPelajarSemasa = PlayerPrefs.GetString("UmurPelajar", "");
+        avatarSemasa = PlayerPrefs.GetInt("AvatarPelajar", 0);
+        avatarDipilihSementara = avatarSemasa;
 
-        // 2. Ambil data REKOD bagi MODUL 1 (Makan & Minum)
-        siapMakan = PlayerPrefs.GetInt("MakanMinum_JumlahSiap", 0);
-        tarikhMakan = PlayerPrefs.GetString("MakanMinum_TarikhAkhir", "Belum ada rekod");
-
-        // 3. Ambil data REKOD bagi MODUL 2 (Toilet Time)
-        siapToilet = PlayerPrefs.GetInt("ToiletTime_JumlahSiap", 0);
-        tarikhToilet = PlayerPrefs.GetString("ToiletTime_TarikhAkhir", "Belum ada rekod");
-
-        // 4. Ambil data REKOD bagi MODUL 3 (Saya Bersih)
-        siapModul3 = PlayerPrefs.GetInt("Modul3_JumlahSiap", 0);
-        tarikhModul3 = PlayerPrefs.GetString("Modul3_TarikhAkhir", "Belum ada rekod");
-
-        // 5. Ambil data REKOD bagi MODUL 4 (Saya Kemas)
-        siapModul4 = PlayerPrefs.GetInt("Modul4_JumlahSiap", 0);
-        tarikhModul4 = PlayerPrefs.GetString("Modul4_TarikhAkhir", "Belum ada rekod");
-
-
-        // Setkan teks input nama mengikut data semasa
         if (inputNamaPelajar != null)
         {
             inputNamaPelajar.text = (namaPelajarSemasa == "Belum Tetap") ? "" : namaPelajarSemasa;
         }
+        
+        if (inputUmurPelajar != null)
+        {
+            inputUmurPelajar.text = umurPelajarSemasa;
+        }
 
-        // 6. Gabungkan keseluruhan laporan log ke dalam satu paparan teks yang kemas
-        teksPapanPemuka.text = "<b>PROFIL PELAJAR</b>\n" +
-                              "Nama Pelajar: " + namaPelajarSemasa + "\n\n" +
-                              
-                              "<b>REKOD PROGRESS MODUL</b>\n\n" +
-                              
-                              "<b>Modul 1: Makan & Minum</b>\n" +
-                              "Jumlah Bersiap: " + siapMakan + " kali\n" +
-                              "Tarikh Akhir: " + tarikhMakan + "\n\n" +
-                              
-                              "<b>Modul 2: Toilet Time</b>\n" +
-                              "Jumlah Bersiap: " + siapToilet + " kali\n" +
-                              "Tarikh Akhir: " + tarikhToilet + "\n\n" +
-                              
-                              "<b>Modul 3: Saya Bersih</b>\n" +
-                              "Jumlah Bersiap: " + siapModul3 + " kali\n" +
-                              "Tarikh Akhir: " + tarikhModul3 + "\n\n" +
-                              
-                              "<b>Modul 4: Saya Kemas</b>\n" +
-                              "Jumlah Bersiap: " + siapModul4 + " kali\n" +
-                              "Tarikh Akhir: " + tarikhModul4;
+        KemaskiniVisualAvatar(avatarSemasa);
     }
 
-    public void SimpanNamaPelajar()
+    public void BinaJadualRekod()
+    {
+        if (tableContentContainer == null || rowPrefab == null) return;
+
+        // Kosongkan jadual sedia ada
+        foreach (Transform child in tableContentContainer)
+        {
+            Destroy(child.gameObject);
+        }
+
+        string namaPelajar = PlayerPrefs.GetString("NamaPelajar", "Belum Tetap");
+        
+        string[] modulKeys = { "MakanMinum", "ToiletTime", "Modul3", "Modul4" };
+        string[] modulNames = { "Makan & Minum", "Toilet Time", "Saya Bersih", "Saya Kemas" };
+
+        for (int i = 0; i < 4; i++)
+        {
+            int jumlahSiap = PlayerPrefs.GetInt(modulKeys[i] + "_JumlahSiap", 0);
+            string tarikhAkhir = PlayerPrefs.GetString(modulKeys[i] + "_TarikhAkhir", "Belum ada rekod");
+
+            GameObject row = Instantiate(rowPrefab, tableContentContainer);
+            row.SetActive(true);
+            
+            TextMeshProUGUI[] texts = row.GetComponentsInChildren<TextMeshProUGUI>();
+            if (texts.Length >= 5)
+            {
+                texts[0].text = tarikhAkhir;
+                texts[1].text = namaPelajar;
+                texts[2].text = modulNames[i];
+                texts[3].text = "Semua Aktiviti"; // Placeholder aktiviti
+                texts[4].text = jumlahSiap.ToString();
+            }
+
+            // Status Badge
+            Transform badgeTransform = row.transform.Find("BadgeWrapper/Badge");
+            if (badgeTransform != null)
+            {
+                Image badgeImg = badgeTransform.GetComponent<Image>();
+                UnityEngine.UI.Outline badgeOutline = badgeTransform.GetComponent<UnityEngine.UI.Outline>();
+                Transform textTransform = badgeTransform.Find("Text");
+                
+                if (textTransform != null && badgeImg != null && badgeOutline != null)
+                {
+                    TextMeshProUGUI badgeText = textTransform.GetComponent<TextMeshProUGUI>();
+                    Color textColor = Color.black;
+                    Color bgColor = Color.white;
+
+                    if (jumlahSiap > 1) 
+                    {
+                        badgeText.text = "Repeated";
+                        ColorUtility.TryParseHtmlString("#2980B9", out textColor); // Dark Blue
+                    }
+                    else if (jumlahSiap == 1) 
+                    {
+                        badgeText.text = "Completed";
+                        ColorUtility.TryParseHtmlString("#27AE60", out textColor); // Dark Green
+                    }
+                    else 
+                    {
+                        badgeText.text = "Not Started";
+                        ColorUtility.TryParseHtmlString("#7F8C8D", out textColor); // Dark Gray
+                    }
+
+                    bgColor = textColor; 
+                    bgColor.a = 0.2f;
+
+                    badgeImg.color = bgColor;
+                    badgeOutline.effectColor = textColor;
+                    badgeText.color = textColor;
+                }
+            }
+        }
+    }
+
+    public void SimpanDataProfil()
     {
         if (inputNamaPelajar != null && !string.IsNullOrEmpty(inputNamaPelajar.text))
         {
             PlayerPrefs.SetString("NamaPelajar", inputNamaPelajar.text);
-            PlayerPrefs.Save();
-            
-            Debug.Log("Nama pelajar berjaya disimpan: " + inputNamaPelajar.text);
+        }
+        
+        if (inputUmurPelajar != null)
+        {
+            PlayerPrefs.SetString("UmurPelajar", inputUmurPelajar.text);
+        }
 
-            KemaskanPaparan();
+        PlayerPrefs.SetInt("AvatarPelajar", avatarDipilihSementara);
+        PlayerPrefs.Save();
+        
+        Debug.Log("Profil pelajar berjaya disimpan.");
+        KemaskanPaparan();
+
+        // Update the sidebar immediately
+        ProfilSidebar sidebar = Object.FindFirstObjectByType<ProfilSidebar>();
+        if (sidebar != null)
+        {
+            sidebar.KemaskiniProfil();
         }
     }
 
-    // --- FUNGSI BAHARU: EKSPORT DATA KE EXCEL (CSV) ---
+    public void ResetSemuaRekod()
+    {
+        string[] modulKeys = { "MakanMinum", "ToiletTime", "Modul3", "Modul4" };
+        foreach(string key in modulKeys)
+        {
+            PlayerPrefs.SetInt(key + "_JumlahSiap", 0);
+            PlayerPrefs.SetString(key + "_TarikhAkhir", "Belum ada rekod");
+        }
+        PlayerPrefs.Save();
+        BinaJadualRekod();
+        Debug.Log("Sistem: Semua rekod dipadamkan dari Dashboard.");
+    }
+
     public void EksportKeExcel()
     {
-        // Pastikan data dipaparkan semula dengan nilai paling segar sebelum mula eksport
         KemaskanPaparan();
 
-        // 1. Tetapkan nama fail yang unik mengikut nama pelajar
         string namaFail = "Laporan_Progress_" + namaPelajarSemasa.Replace(" ", "_") + ".csv";
         string laluanPenuh = Path.Combine(Application.persistentDataPath, namaFail);
 
-        // 2. Bina struktur teks berformat CSV (Sesuai untuk Microsoft Excel & Google Sheets)
-        // Kita gunakan pembahagi semikolon (;) untuk mengelakkan ralat susunan petak pada komputer Windows
         string isiKandungan = "sep=;\n"; 
         isiKandungan += "PROFIL PELAJAR;\n";
-        isiKandungan += "Nama Pelajar: ;" + namaPelajarSemasa + ";\n\n";
+        isiKandungan += "Nama Pelajar: ;" + namaPelajarSemasa + ";\n";
+        isiKandungan += "Umur: ;" + umurPelajarSemasa + ";\n\n";
         
-        isiKandungan += "LAPORAN KEMAJUAN MODUL AUTISME;\n";
-        isiKandungan += "Nama Modul;Jumlah Disiapkan (Kali);Tarikh & Masa Akhir Disiapkan;\n";
-        isiKandungan += "Modul 1: Makan & Minum;" + siapMakan + ";" + tarikhMakan + ";\n";
-        isiKandungan += "Modul 2: Toilet Time;" + siapToilet + ";" + tarikhToilet + ";\n";
-        isiKandungan += "Modul 3: Saya Bersih;" + siapModul3 + ";" + tarikhModul3 + ";\n";
-        isiKandungan += "Modul 4: Saya Kemas;" + siapModul4 + ";" + tarikhModul4 + ";\n";
+        isiKandungan += "LAPORAN KEMAJUAN TERPERINCI;\n";
+        isiKandungan += "Tarikh & Masa;Nama Pelajar;Modul;Aktiviti;Jumlah Siap;Status;\n";
 
-        // 3. Simpan data ke dalam memori storan peranti
+        string[] modulKeys = { "MakanMinum", "ToiletTime", "Modul3", "Modul4" };
+        string[] modulNames = { "Makan & Minum", "Toilet Time", "Saya Bersih", "Saya Kemas" };
+
+        for (int i = 0; i < 4; i++)
+        {
+            int jumlahSiap = PlayerPrefs.GetInt(modulKeys[i] + "_JumlahSiap", 0);
+            string tarikhAkhir = PlayerPrefs.GetString(modulKeys[i] + "_TarikhAkhir", "Belum ada rekod");
+            string status = jumlahSiap > 1 ? "Repeated" : (jumlahSiap == 1 ? "Completed" : "Not Started");
+
+            isiKandungan += tarikhAkhir + ";" + namaPelajarSemasa + ";" + modulNames[i] + ";Semua Aktiviti;" + jumlahSiap + ";" + status + ";\n";
+        }
+
         try
         {
             File.WriteAllText(laluanPenuh, isiKandungan, System.Text.Encoding.UTF8);
             Debug.Log("Sistem: Fail Excel (CSV) berjaya dihasilkan di: " + laluanPenuh);
             
-            // Mengaktifkan bukaan tetingkap folder automatik jika anda sedang menguji di dalam Unity Editor (PC)
             #if UNITY_EDITOR
             Application.OpenURL(Application.persistentDataPath); 
             #endif

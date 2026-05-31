@@ -1,0 +1,234 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4e3591bfa321e84fbea4c2af44c662d, type: 3}
+  m_Name: DataTerjemahan
+  m_EditorClassIdentifier: Assembly-CSharp::DataTerjemahan
+  senaraiTerjemahan:
+  - kunci: saya_boleh
+    teksInggeris: I Can Do It!
+    teksMelayu: Saya Boleh!
+  - kunci: btn_home
+    teksInggeris: Home
+    teksMelayu: Utama
+  - kunci: btn_eating
+    teksInggeris: Eating & Drinking
+    teksMelayu: Makan & Minum
+  - kunci: btn_toilet
+    teksInggeris: Toilet Time
+    teksMelayu: Masa Tandas
+  - kunci: btn_clean
+    teksInggeris: I Am Clean
+    teksMelayu: Saya Bersih
+  - kunci: btn_organized
+    teksInggeris: I Am Organized
+    teksMelayu: Saya Kemas
+  - kunci: btn_parent_mode
+    teksInggeris: Parent Mode
+    teksMelayu: Mod Ibu Bapa
+  - kunci: dash_title
+    teksInggeris: Parent & Teacher Dashboard
+    teksMelayu: Papan Pemuka Ibu Bapa & Guru
+  - kunci: btn_close
+    teksInggeris: Close
+    teksMelayu: Tutup
+  - kunci: tab_profile
+    teksInggeris: Child Profile
+    teksMelayu: Profil Anak
+  - kunci: tab_media
+    teksInggeris: Manage Images & Video
+    teksMelayu: Urus Imej & Video
+  - kunci: tab_progress
+    teksInggeris: Progress & CSV
+    teksMelayu: Kemajuan & CSV
+  - kunci: tab_settings
+    teksInggeris: System Settings
+    teksMelayu: Tetapan Sistem
+  - kunci: lbl_child_name
+    teksInggeris: Child Name
+    teksMelayu: Nama Anak
+  - kunci: lbl_age
+    teksInggeris: Age (Years)
+    teksMelayu: Umur (Tahun)
+  - kunci: lbl_select_avatar
+    teksInggeris: Select Avatar
+    teksMelayu: Pilih Avatar
+  - kunci: btn_save_profile
+    teksInggeris: Save Profile
+    teksMelayu: Simpan Profil
+  - kunci: txt_i_can_eat_indepe
+    teksInggeris: I Can Eat Independently
+    teksMelayu: Saya Boleh Makan Sendiri
+  - kunci: txt_home
+    teksInggeris: Home
+    teksMelayu: Utama
+  - kunci: txt_upload
+    teksInggeris: Upload
+    teksMelayu: Muat Naik
+  - kunci: txt_status
+    teksInggeris: Status
+    teksMelayu: Status
+  - kunci: txt_name
+    teksInggeris: Name
+    teksMelayu: Nama
+  - kunci: txt_main_module
+    teksInggeris: MAIN MODULE
+    teksMelayu: MODUL UTAMA
+  - kunci: txt_english__melayu
+    teksInggeris: English / Melayu
+    teksMelayu: English / Melayu
+  - kunci: txt_parent__teacher_
+    teksInggeris: Parent & Teacher Dashboard
+    teksMelayu: Papan Pemuka Ibu Bapa & Guru
+  - kunci: txt_default_instruct
+    teksInggeris: Default instruction video active.
+    teksMelayu: Video arahan lalai aktif.
+  - kunci: txt_i_am_organized
+    teksInggeris: I Am Organized
+    teksMelayu: Saya Kemas
+  - kunci: txt_repeated
+    teksInggeris: Repeated
+    teksMelayu: Diulang
+  - kunci: txt_activity
+    teksInggeris: Activity
+    teksMelayu: Aktiviti
+  - kunci: txt_close
+    teksInggeris: Close
+    teksMelayu: Tutup
+  - kunci: txt_age_years
+    teksInggeris: Age (Years)
+    teksMelayu: Umur (Tahun)
+  - kunci: txt_total_completed
+    teksInggeris: Total Completed
+    teksMelayu: Jumlah Siap
+  - kunci: txt_i_am_clean
+    teksInggeris: I Am Clean
+    teksMelayu: Saya Bersih
+  - kunci: txt_i_can_prepare_my
+    teksInggeris: I Can Prepare Myself
+    teksMelayu: Saya Boleh Bersiap Sendiri
+  - kunci: txt_upload_mp4
+    teksInggeris: Upload MP4
+    teksMelayu: Muat Naik MP4
+  - kunci: txt_i_can_keep_mysel
+    teksInggeris: I Can Keep Myself Clean
+    teksMelayu: Saya Boleh Jaga Kebersihan
+  - kunci: txt_toilet_time
+    teksInggeris: Toilet Time
+    teksMelayu: Masa Tandas
+  - kunci: txt__save_profile
+    teksInggeris: "\U0001F4BE Save Profile"
+    teksMelayu: "\U0001F4BE Simpan Profil"
+  - kunci: txt_child_profile
+    teksInggeris: Child Profile
+    teksMelayu: Profil Anak
+  - kunci: txt_parent_mode
+    teksInggeris: Parent Mode
+    teksMelayu: Mod Ibu Bapa
+  - kunci: txt_i_can_do_it
+    teksInggeris: I Can Do It!
+    teksMelayu: Saya Boleh!
+  - kunci: txt_manage_images__v
+    teksInggeris: Manage Images & Video
+    teksMelayu: Urus Imej & Video
+  - kunci: txt_select_avatar
+    teksInggeris: Select Avatar
+    teksMelayu: Pilih Avatar
+  - kunci: txt_teacher__parent_
+    teksInggeris: Teacher / Parent Mode
+    teksMelayu: Mod Cikgu / Ibubapa
+  - kunci: txt_eating__drinking
+    teksInggeris: Eating & Drinking
+    teksMelayu: Makan & Minum
+  - kunci: txt_module
+    teksInggeris: Module
+    teksMelayu: Modul
+  - kunci: txt_i_can_go_to_the_
+    teksInggeris: I Can Go To The Toilet
+    teksMelayu: Saya Boleh Ke Tandas
+  - kunci: txt_reset_all
+    teksInggeris: Reset All
+    teksMelayu: Tetapkan Semula Semua
+  - kunci: txt_child_name
+    teksInggeris: Child Name
+    teksMelayu: Nama Anak
+  - kunci: txt_date__time
+    teksInggeris: Date & Time
+    teksMelayu: Tarikh & Masa
+  - kunci: txt_upload_image
+    teksInggeris: Upload Image
+    teksMelayu: Muat Naik Imej
+  - kunci: txt_system_settings
+    teksInggeris: System Settings
+    teksMelayu: Tetapan Sistem
+  - kunci: txt_download_csv_rep
+    teksInggeris: Download CSV Report
+    teksMelayu: Muat Turun Laporan CSV
+  - kunci: txt_good
+    teksInggeris: Good
+    teksMelayu: Bagus
+  - kunci: txt_try_again
+    teksInggeris: TRY AGAIN
+    teksMelayu: CUBA LAGI
+  - kunci: txt_eating_and_drinking
+    teksInggeris: EATING AND DRINKING
+    teksMelayu: MAKAN DAN MINUM
+  - kunci: txt_next
+    teksInggeris: NEXT
+    teksMelayu: SETERUSNYA
+  - kunci: txt_put_the_spoon_on_the_
+    teksInggeris: Put the spoon on the plate.
+    teksMelayu: Letak sudu ke pinggan.
+  - kunci: txt_arrange_the_steps_bef
+    teksInggeris: Arrange the steps before eating
+    teksMelayu: Susun langkah sebelum makan
+  - kunci: txt_adam_holds_the_spoon
+    teksInggeris: Adam holds the spoon.
+    teksMelayu: Adam pegang sudu.
+  - kunci: txt_choose_spoon
+    teksInggeris: CHOOSE SPOON
+    teksMelayu: PILIH SUDU
+  - kunci: txt_guide_video
+    teksInggeris: GUIDE VIDEO
+    teksMelayu: VIDEO PANDUAN
+  - kunci: txt_adam_wants_to_go_to_t
+    teksInggeris: Adam wants to go to the toilet
+    teksMelayu: Adam mahu ke tandas
+  - kunci: txt_move_the_tissue_to_th
+    teksInggeris: Move the tissue to the toilet bowl
+    teksMelayu: Gerakkan tisu ke mangkuk tandas
+  - kunci: txt_what_to_do_after_usin
+    teksInggeris: What to do after using the toilet?
+    teksMelayu: Apa perlu buat selepas guna tandas?
+  - kunci: txt_which_one_is_clean
+    teksInggeris: Which one is clean
+    teksMelayu: Yang manakah bersih
+  - kunci: txt_adam_can_stay_healthy
+    teksInggeris: Adam Can Stay Healthy
+    teksMelayu: Adam Boleh Jaga Kesihatan
+  - kunci: txt_move_hand_to_the_soap
+    teksInggeris: Move hand to the soap
+    teksMelayu: gerakkan tangan ke sabun
+  - kunci: txt_arrange_the_hand_wash
+    teksInggeris: Arrange the hand washing steps
+    teksMelayu: Susun langkah basuh tangan
+  - kunci: txt_pack_the_items_into_t
+    teksInggeris: Pack the items into the bag
+    teksMelayu: Kemaskan barang ke dalam beg
+  - kunci: txt_choose_shoes
+    teksInggeris: Choose Shoes
+    teksMelayu: Pilih Kasut
+  - kunci: txt_adam_wants_to_get_rea
+    teksInggeris: Adam wants to get ready
+    teksMelayu: Adam mahu bersiap
+  - kunci: txt_arrange_the_steps_to_
+    teksInggeris: Arrange the steps to organize items
+    teksMelayu: Susun langkah kemas barang
