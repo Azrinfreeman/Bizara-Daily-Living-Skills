@@ -1,4 +1,4 @@
-# Bizara Life Skill
+# Bizara Daily Living Skills
 
 A Unity learning project that turns daily routines into short selection, drag-and-drop, and sequencing activities. A parent dashboard provides a local learner profile, completion records, and options to personalize learning media.
 
